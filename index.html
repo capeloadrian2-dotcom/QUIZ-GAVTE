@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galería Visual · Teoría de la Conducción Tipo E · Ecuador 2026</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&family=Barlow:ital,wght@0,300;0,400;0,600;1,300&display=swap');
+
+:root {
+  --bg: #080d14;
+  --surface: #0e1822;
+  --surface2: #162030;
+  --border: #1e3048;
+  --accent-blue: #0ea5e9;
+  --accent-green: #22c55e;
+  --accent-orange: #f97316;
+  --accent-red: #ef4444;
+  --accent-yellow: #eab308;
+  --accent-purple: #a855f7;
+  --text: #e2eaf4;
+  --text-muted: #6b8aab;
+  --text-dim: #3a5470;
+  --glow-blue: rgba(14,165,233,0.15);
+  --glow-green: rgba(34,197,94,0.15);
+  --glow-orange: rgba(249,115,22,0.15);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Barlow', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── GRID BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(14,165,233,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14,165,233,0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  padding: 60px 40px 50px;
+  text-align: center;
+  background: linear-gradient(180deg, #0a1525 0%, var(--bg) 100%);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -80px; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 300px;
+  background: radial-gradient(ellipse, rgba(14,165,233,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-badge {
+  display: inline-block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-blue);
+  border: 1px solid var(--accent-blue);
+  padding: 5px 14px;
+  border-radius: 2px;
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.2s forwards;
+}
+
+.hero h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(32px, 5vw, 62px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.4s forwards;
+}
+
+.hero h1 span {
+  color: var(--accent-blue);
+  display: block;
+}
+
+.hero-sub {
+  margin-top: 16px;
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.6s forwards;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 36px;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.6s 0.8s forwards;
+}
+
+.stat-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.stat-pill .num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--accent-blue);
+}
+
+.stat-pill .lbl {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  line-height: 1.3;
+  text-align: left;
+}
+
+/* ── NAV TABS ── */
+.nav-tabs {
+  display: flex;
+  overflow-x: auto;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  gap: 2px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  scrollbar-width: none;
+}
+.nav-tabs::-webkit-scrollbar { display: none; }
+
+.nav-tab {
+  flex-shrink: 0;
+  padding: 14px 18px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s;
+  white-space: nowrap;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  user-select: none;
+}
+
+.nav-tab:hover { color: var(--text); border-bottom-color: var(--border); }
+.nav-tab.active { color: var(--accent-blue); border-bottom-color: var(--accent-blue); }
+
+/* ── MAIN CONTENT ── */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── UNIT SECTIONS ── */
+.unit-section {
+  display: none;
+  animation: sectionIn 0.4s ease forwards;
+}
+.unit-section.active { display: block; }
+
+@keyframes sectionIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.unit-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin-bottom: 40px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+}
+
+.unit-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 1;
+  opacity: 0.08;
+  user-select: none;
+  flex-shrink: 0;
+  color: white;
+}
+
+.unit-title-block { flex: 1; }
+
+.unit-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.unit-title {
+  font-family: 'Oswald', sans-serif;
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.unit-desc {
+  margin-top: 10px;
+  font-size: 14px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+/* ── CARDS GRID ── */
+.cards-grid {
+  display: grid;
+  gap: 16px;
+}
+.cards-grid.g2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.cards-grid.g3 { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.cards-grid.g1 { grid-template-columns: 1fr; }
+
+/* ── BASE CARD ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+.card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-blue);
+  box-shadow: 0 8px 32px rgba(14,165,233,0.1);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent-color, var(--accent-blue)), transparent);
+}
+
+.card-icon {
+  width: 52px; height: 52px;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  margin-bottom: 8px;
+}
+
+.card h3 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 10px;
+  color: var(--accent-color, var(--accent-blue));
+}
+
+.card p {
+  font-size: 13.5px;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ── BIG STAT CARD ── */
+.stat-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.25s;
+}
+.stat-card:hover { transform: translateY(-3px); }
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: -30px; right: -30px;
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-color, var(--accent-blue)) 0%, transparent 70%);
+  opacity: 0.08;
+}
+
+.stat-card .big-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent-color, var(--accent-blue));
+}
+.stat-card .unit-lbl {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+.stat-card .stat-desc {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+/* ── ALERT BOX ── */
+.alert-box {
+  border-radius: 4px;
+  padding: 20px 24px;
+  border-left: 3px solid var(--accent-color, var(--accent-orange));
+  background: linear-gradient(135deg, var(--surface2) 0%, rgba(14,24,34,0.8) 100%);
+  margin-top: 16px;
+}
+.alert-box .alert-head {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent-color, var(--accent-orange));
+  margin-bottom: 6px;
+}
+.alert-box p {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* ── PROGRESS BAR ── */
+.prog-item {
+  margin-bottom: 18px;
+}
+.prog-label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  font-size: 12px;
+}
+.prog-label span:first-child { color: var(--text); font-weight: 400; }
+.prog-label span:last-child  { font-family: 'Space Mono', monospace; color: var(--accent-color, var(--accent-green)); font-size: 11px; }
+.prog-bar {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.prog-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-color, var(--accent-green)), color-mix(in srgb, var(--accent-color, var(--accent-green)) 60%, white));
+  border-radius: 2px;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+.prog-fill.animate { width: var(--w); }
+
+/* ── STEPS LIST ── */
+.steps-list { list-style: none; }
+.steps-list li {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+  align-items: flex-start;
+}
+.steps-list li:last-child { border-bottom: none; }
+.step-num {
+  flex-shrink: 0;
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--accent-color, var(--accent-blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Oswald', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--bg);
+}
+.step-text {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  padding-top: 4px;
+}
+
+/* ── TAG PILLS ── */
+.tag-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.tag-pill {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 2px;
+  border: 1px solid;
+}
+
+/* ── TABLE ── */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.data-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  border-bottom: 1px solid var(--border);
+}
+.data-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(30,48,72,0.5);
+  color: var(--text-muted);
+  font-weight: 300;
+}
+.data-table td:first-child { color: var(--text); font-weight: 400; }
+.data-table tr:hover td { background: rgba(255,255,255,0.02); }
+.data-table .highlight { color: var(--accent-color, var(--accent-green)); font-family: 'Space Mono', monospace; font-size: 11px; }
+
+/* ── MATPEL GRID ── */
+.matpel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+  gap: 10px;
+}
+.matpel-card {
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  padding: 10px;
+  text-align: center;
+  cursor: default;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.matpel-card:hover { transform: scale(1.05); box-shadow: 0 4px 20px rgba(0,0,0,0.4); }
+.matpel-num {
+  font-family: 'Oswald', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}
+.matpel-name {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-top: 4px;
+  line-height: 1.2;
+}
+.matpel-icon { font-size: 22px; margin-bottom: 4px; }
+
+/* ── SPEEDOMETER VISUAL ── */
+.speed-visual {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.speed-chip {
+  flex: 1;
+  min-width: 100px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 18px 14px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.speed-chip::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--accent-color, var(--accent-green));
+}
+.speed-chip .zone { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-dim); margin-bottom: 8px; }
+.speed-chip .kmh { font-family: 'Oswald', sans-serif; font-size: 36px; font-weight: 700; color: var(--accent-color, var(--accent-green)); line-height: 1; }
+.speed-chip .kmh-unit { font-family: 'Space Mono', monospace; font-size: 9px; color: var(--text-dim); }
+
+/* ── TIMELINE ── */
+.timeline { position: relative; padding-left: 28px; }
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 8px; top: 0; bottom: 0;
+  width: 2px;
+  background: var(--border);
+}
+.tl-item {
+  position: relative;
+  margin-bottom: 22px;
+}
+.tl-item::before {
+  content: '';
+  position: absolute;
+  left: -24px; top: 6px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--accent-color, var(--accent-blue));
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.15);
+}
+.tl-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--accent-color, var(--accent-blue));
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+.tl-text {
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+/* ── SMOKE LEGEND ── */
+.smoke-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.smoke-chip {
+  flex: 1;
+  min-width: 130px;
+  border-radius: 4px;
+  padding: 18px 16px;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+}
+.smoke-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.smoke-chip h4 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.smoke-chip p { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+/* ── CHECKLIST ── */
+.checklist { list-style: none; }
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(30,48,72,0.4);
+  font-size: 13.5px;
+  color: var(--text-muted);
+  font-weight: 300;
+}
+.checklist li:last-child { border-bottom: none; }
+.check-box {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--accent-color, var(--accent-green));
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+.check-box::after {
+  content: '✓';
+  font-size: 10px;
+  color: var(--accent-color, var(--accent-green));
+}
+
+/* ── SECTION DIVIDER ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 32px 0;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes rotateDash {
+  to { stroke-dashoffset: 0; }
+}
+@keyframes truckMove {
+  0%   { transform: translateX(-10px); }
+  100% { transform: translateX(10px); }
+}
+@keyframes blink { 50% { opacity: 0; } }
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+/* ── SVG ICON ANIMATIONS ── */
+.icon-spin { animation: spin 8s linear infinite; }
+.icon-pulse { animation: breathe 2.5s ease-in-out infinite; }
+.truck-body { animation: truckMove 1.8s ease-in-out infinite alternate; }
+.blink-dot { animation: blink 1.2s step-end infinite; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 28px;
+  border-top: 1px solid var(--border);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  .hero { padding: 40px 20px 36px; }
+  .hero-stats { gap: 12px; }
+  .unit-header { flex-direction: column; gap: 8px; }
+  .unit-number { font-size: 50px; }
+  .main { padding: 24px 16px 60px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── HERO ─── -->
+<header class="hero">
+  <div class="hero-badge">Galería Pedagógica · Licencia Tipo E · Ecuador 2026</div>
+  <h1>Teoría de la<br><span>Conducción Profesional</span></h1>
+  <p class="hero-sub">Escuela de Capacitación · Sindicato Provincial de Choferes de Manabí · Portoviejo</p>
+  <div class="hero-stats">
+    <div class="stat-pill">
+      <div class="num">9</div>
+      <div class="lbl">Unidades<br>de estudio</div>
+    </div>
+    <div class="stat-pill">
+      <div class="num">48t</div>
+      <div class="lbl">Peso máximo<br>autorizado</div>
+    </div>
+    <div class="stat-pill">
+      <div class="num">E</div>
+      <div class="lbl">Licencia<br>Tipo</div>
+    </div>
+    <div class="stat-pill">
+      <div class="num">ANT</div>
+      <div class="lbl">Normativa<br>vigente</div>
+    </div>
+  </div>
+</header>
+
+<!-- ─── NAV TABS ─── -->
+<nav class="nav-tabs" id="navTabs">
+  <button class="nav-tab active" onclick="showUnit(0)">U1 · Marco Legal</button>
+  <button class="nav-tab" onclick="showUnit(1)">U2 · Perfil y Ética</button>
+  <button class="nav-tab" onclick="showUnit(2)">U3 · Eficiencia</button>
+  <button class="nav-tab" onclick="showUnit(3)">U4 · Defensiva</button>
+  <button class="nav-tab" onclick="showUnit(4)">U5 · Mecánica</button>
+  <button class="nav-tab" onclick="showUnit(5)">U6 · Entornos</button>
+  <button class="nav-tab" onclick="showUnit(6)">U7 · Emergencias</button>
+  <button class="nav-tab" onclick="showUnit(7)">U8 · Carga</button>
+  <button class="nav-tab" onclick="showUnit(8)">U9 · Salud</button>
+</nav>
+
+<!-- ─── MAIN ─── -->
+<main class="main">
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 1 — MARCO LEGAL
+══════════════════════════════════════════ -->
+<section class="unit-section active" id="unit-0">
+  <div class="unit-header">
+    <div class="unit-number">01</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-blue)">⚖ Normativa vigente</div>
+      <h2 class="unit-title">Marco Legal del<br>Transporte Pesado</h2>
+      <p class="unit-desc">El fundamento jurídico que rige cada kilómetro recorrido. Conocer la ley no es opcional: es la primera competencia del conductor profesional tipo E.</p>
+    </div>
+  </div>
+
+  <!-- Tres pilares legales -->
+  <div class="cards-grid g3" style="margin-bottom:16px">
+    <div class="card" style="--accent-color:var(--accent-blue)">
+      <div class="card-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="8" y="6" width="32" height="36" rx="3" stroke="var(--accent-blue)" stroke-width="1.5"/>
+          <line x1="15" y1="16" x2="33" y2="16" stroke="var(--accent-blue)" stroke-width="1.5"/>
+          <line x1="15" y1="22" x2="33" y2="22" stroke="var(--accent-blue)" stroke-width="1.5"/>
+          <line x1="15" y1="28" x2="24" y2="28" stroke="var(--accent-blue)" stroke-width="1.5"/>
+          <circle cx="37" cy="37" r="8" fill="var(--bg)" stroke="var(--accent-blue)" stroke-width="1.5" class="icon-pulse"/>
+          <text x="37" y="41" text-anchor="middle" fill="var(--accent-blue)" font-size="9" font-family="Oswald">L</text>
+        </svg>
+      </div>
+      <div class="card-label">Ley principal</div>
+      <h3>LOTTTSV</h3>
+      <p>Regula el transporte terrestre en Ecuador: principios de seguridad vial, competencias de organismos de control, licencias e infracciones.</p>
+    </div>
+
+    <div class="card" style="--accent-color:var(--accent-red)">
+      <div class="card-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <polygon points="24,6 42,38 6,38" stroke="var(--accent-red)" stroke-width="1.5" fill="none"/>
+          <line x1="24" y1="18" x2="24" y2="28" stroke="var(--accent-red)" stroke-width="2"/>
+          <circle cx="24" cy="33" r="1.5" fill="var(--accent-red)" class="blink-dot"/>
+        </svg>
+      </div>
+      <div class="card-label">Código Penal</div>
+      <h3>COIP</h3>
+      <p>Tipifica los delitos de tránsito y sus penas. Muerte culposa (Art.376), conducción en embriaguez (Art.383), fuga del lugar (Art.385).</p>
+    </div>
+
+    <div class="card" style="--accent-color:var(--accent-green)">
+      <div class="card-icon">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <circle cx="24" cy="24" r="16" stroke="var(--accent-green)" stroke-width="1.5" stroke-dasharray="4 2" class="icon-spin"/>
+          <circle cx="24" cy="24" r="8" stroke="var(--accent-green)" stroke-width="1.5"/>
+          <circle cx="24" cy="24" r="2" fill="var(--accent-green)"/>
+        </svg>
+      </div>
+      <div class="card-label">Organismo regulador</div>
+      <h3>ANT</h3>
+      <p>Agencia Nacional de Tránsito: regulación, planificación y control del transporte terrestre, tránsito y seguridad vial a nivel nacional.</p>
+    </div>
+  </div>
+
+  <!-- Sistema de puntos -->
+  <div class="card" style="--accent-color:var(--accent-yellow); margin-bottom:16px">
+    <div class="card-label">Sistema de puntos de la licencia de conducir</div>
+    <h3>Puntaje y sanciones</h3>
+    <div style="margin-top:20px">
+      <div class="prog-item" style="--accent-color:var(--accent-green)">
+        <div class="prog-label">
+          <span>Puntos iniciales de la licencia</span>
+          <span>30 pts</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:100%; --accent-color:var(--accent-green)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-label">
+          <span>Infracción Leve — descuento</span>
+          <span style="color:var(--accent-yellow)">−1.5 pts</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:5%; --accent-color:var(--accent-yellow)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-label">
+          <span>Infracción Grave — descuento</span>
+          <span style="color:var(--accent-orange)">−3 pts</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:10%; --accent-color:var(--accent-orange)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-label">
+          <span>Infracción Muy Grave — descuento</span>
+          <span style="color:var(--accent-red)">−6 pts</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:20%; --accent-color:var(--accent-red)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-label">
+          <span>Delito de tránsito (COIP)</span>
+          <span style="color:#ff0000; font-weight:700">REVOCACIÓN</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:100%; --accent-color:#ff0000; background:red"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box" style="--accent-color:var(--accent-orange)">
+    <div class="alert-head">⚠ Agravante para conductor tipo E</div>
+    <p>Las infracciones cometidas con vehículos de transporte comercial tienen sanciones agravadas respecto a vehículos particulares. Perder todos los puntos implica la pérdida de la fuente de trabajo.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 2 — PERFIL Y ÉTICA
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-1">
+  <div class="unit-header">
+    <div class="unit-number">02</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-purple)">👤 Profesionalismo</div>
+      <h2 class="unit-title">Perfil, Ética<br>y Responsabilidad</h2>
+      <p class="unit-desc">El conductor tipo E no es solo un operador de maquinaria: es un profesional con impacto directo en vidas, economía y comunidades enteras.</p>
+    </div>
+  </div>
+
+  <div class="cards-grid g3" style="margin-bottom:16px">
+    <div class="card" style="--accent-color:var(--accent-blue)">
+      <div class="card-label">Área 1</div>
+      <h3>Conocimiento Técnico</h3>
+      <div class="tag-pills">
+        <span class="tag-pill" style="color:var(--accent-blue);border-color:var(--accent-blue)">Técnicas de conducción</span>
+        <span class="tag-pill" style="color:var(--accent-blue);border-color:var(--accent-blue)">Mecánica básica</span>
+        <span class="tag-pill" style="color:var(--accent-blue);border-color:var(--accent-blue)">Normativa vial</span>
+      </div>
+    </div>
+    <div class="card" style="--accent-color:var(--accent-green)">
+      <div class="card-label">Área 2</div>
+      <h3>Habilidades Operativas</h3>
+      <div class="tag-pills">
+        <span class="tag-pill" style="color:var(--accent-green);border-color:var(--accent-green)">Manejo pesado</span>
+        <span class="tag-pill" style="color:var(--accent-green);border-color:var(--accent-green)">Carga / descarga</span>
+        <span class="tag-pill" style="color:var(--accent-green);border-color:var(--accent-green)">Navegación de rutas</span>
+      </div>
+    </div>
+    <div class="card" style="--accent-color:var(--accent-purple)">
+      <div class="card-label">Área 3</div>
+      <h3>Actitudes Profesionales</h3>
+      <div class="tag-pills">
+        <span class="tag-pill" style="color:var(--accent-purple);border-color:var(--accent-purple)">Responsabilidad</span>
+        <span class="tag-pill" style="color:var(--accent-purple);border-color:var(--accent-purple)">Ética</span>
+        <span class="tag-pill" style="color:var(--accent-purple);border-color:var(--accent-purple)">Autocontrol</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="--accent-color:var(--accent-purple); margin-bottom:16px">
+    <div class="card-label">Código de conducta</div>
+    <h3>Ética profesional en la práctica</h3>
+    <ul class="checklist" style="margin-top:16px; --accent-color:var(--accent-purple)">
+      <li><div class="check-box"></div>Respetar normas de tránsito permanentemente, no solo cuando hay controles</li>
+      <li><div class="check-box"></div>No conducir bajo efectos del alcohol, drogas o medicamentos que afecten la atención</li>
+      <li><div class="check-box"></div>Mantener el vehículo en condiciones mecánicas óptimas antes de salir</li>
+      <li><div class="check-box"></div>Reportar accidentes con honestidad sin evadir responsabilidades</li>
+      <li><div class="check-box"></div>Tratar con respeto a otros conductores, peatones y ciclistas</li>
+      <li><div class="check-box"></div>Negarse a transportar carga ilegal, peligrosa sin autorización o con exceso de peso</li>
+    </ul>
+  </div>
+
+  <div class="cards-grid g2">
+    <div class="stat-card" style="--accent-color:var(--accent-red)">
+      <div class="unit-lbl">Art. 128 COIP</div>
+      <div class="big-num" style="font-size:28px; line-height:1.2">Deber de<br>socorro</div>
+      <div class="stat-desc">Omitir el socorro a una persona herida en un accidente de tránsito constituye un delito, independientemente de si el conductor fue el causante.</div>
+    </div>
+    <div class="stat-card" style="--accent-color:var(--accent-blue)">
+      <div class="unit-lbl">Responsabilidad civil</div>
+      <div class="big-num" style="font-size:28px; line-height:1.2">Daños a<br>terceros</div>
+      <div class="stat-desc">Por acción u omisión que cause daños materiales. En casos de negligencia grave, la responsabilidad puede ser personal, más allá del seguro del vehículo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 3 — EFICIENCIA
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-2">
+  <div class="unit-header">
+    <div class="unit-number">03</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-green)">⚡ Rendimiento</div>
+      <h2 class="unit-title">Conducción<br>Eficiente y Racional</h2>
+      <p class="unit-desc">Conducir con inteligencia: anticipar, planificar, mantener velocidad constante y aprovechar la física del vehículo. Hasta 30% de ahorro en combustible.</p>
+    </div>
+  </div>
+
+  <!-- Stats de eficiencia -->
+  <div class="cards-grid g3" style="margin-bottom:16px">
+    <div class="stat-card" style="--accent-color:var(--accent-green)">
+      <div class="unit-lbl">Ahorro en combustible</div>
+      <div class="big-num">30%</div>
+      <div class="stat-desc">Conducción racional vs conducción agresiva</div>
+    </div>
+    <div class="stat-card" style="--accent-color:var(--accent-blue)">
+      <div class="unit-lbl">Zona verde del motor</div>
+      <div class="big-num">1200<span style="font-size:22px">–</span>1600</div>
+      <div class="stat-desc">RPM de máximo rendimiento en motores diésel de transporte pesado</div>
+    </div>
+    <div class="stat-card" style="--accent-color:var(--accent-orange)">
+      <div class="unit-lbl">Aceleración brusca</div>
+      <div class="big-num">+40%</div>
+      <div class="stat-desc">Incremento de consumo en ese instante por cada aceleración brusca</div>
+    </div>
+  </div>
+
+  <!-- Zona verde visual -->
+  <div class="card" style="--accent-color:var(--accent-green); margin-bottom:16px">
+    <div class="card-label">Tacómetro — Zona verde del motor</div>
+    <h3>Rango de RPM y efectos</h3>
+    <div style="margin-top:20px">
+      <div class="prog-item">
+        <div class="prog-label">
+          <span style="color:var(--accent-red)">▼ Por debajo de zona verde</span>
+          <span style="color:var(--accent-red)">Riesgo de calado</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:35%; --accent-color:var(--accent-red)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-label">
+          <span style="color:var(--accent-green)">✓ Zona verde (1200–1600 RPM)</span>
+          <span style="color:var(--accent-green)">Rendimiento óptimo</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:75%; --accent-color:var(--accent-green)"></div></div>
+      </div>
+      <div class="prog-item">
+        <div class="prog-label">
+          <span style="color:var(--accent-orange)">▲ Por encima de zona verde</span>
+          <span style="color:var(--accent-orange)">Desgaste acelerado</span>
+        </div>
+        <div class="prog-bar"><div class="prog-fill" style="--w:100%; --accent-color:var(--accent-orange)"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Técnicas -->
+  <div class="card" style="--accent-color:var(--accent-green)">
+    <div class="card-label">Técnicas de conducción eficiente</div>
+    <h3>Protocolo de conducción inteligente</h3>
+    <ul class="steps-list" style="margin-top:16px; --accent-color:var(--accent-green)">
+      <li><div class="step-num" style="background:var(--accent-green)">1</div><div class="step-text"><strong>Arranque correcto:</strong> Esperar 30–60 segundos antes de emprender la marcha para que el aceite lubrique todos los componentes del motor diésel.</div></li>
+      <li><div class="step-num" style="background:var(--accent-green)">2</div><div class="step-text"><strong>Pie de pluma:</strong> Operar el acelerador con suavidad y progresividad. Nunca pisadas bruscas o repentinas.</div></li>
+      <li><div class="step-num" style="background:var(--accent-green)">3</div><div class="step-text"><strong>Anticipación:</strong> Al ver un semáforo rojo o curva próxima, levantar el pie del acelerador. En esa fase el motor diésel no inyecta combustible (consumo cero).</div></li>
+      <li><div class="step-num" style="background:var(--accent-green)">4</div><div class="step-text"><strong>Velocidad constante:</strong> Mantener velocidad estable es más eficiente que variarla. Cada aceleración exige energía adicional al motor.</div></li>
+      <li><div class="step-num" style="background:var(--accent-green)">5</div><div class="step-text"><strong>Planificación de ruta:</strong> Evitar congestión, pendientes innecesarias, programar paradas de combustible y anticipar condiciones climáticas.</div></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 4 — CONDUCCIÓN DEFENSIVA
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-3">
+  <div class="unit-header">
+    <div class="unit-number">04</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-blue)">🛡 Seguridad activa</div>
+      <h2 class="unit-title">Conducción Defensiva<br>y Seguridad Activa</h2>
+      <p class="unit-desc">Anticipar los peligros del entorno y responder adecuadamente. Con 30–40 toneladas, un error tiene consecuencias incomparablemente más graves que en un automóvil.</p>
+    </div>
+  </div>
+
+  <!-- Velocidades máximas -->
+  <div class="card" style="--accent-color:var(--accent-blue); margin-bottom:16px">
+    <div class="card-label">Normativa ANT — Velocidades máximas para transporte pesado</div>
+    <h3>Límites de velocidad</h3>
+    <div class="speed-visual" style="margin-top:20px">
+      <div class="speed-chip" style="--accent-color:var(--accent-green)">
+        <div class="zone">Zona urbana</div>
+        <div class="kmh" style="color:var(--accent-green)">40</div>
+        <div class="kmh-unit">km/h</div>
+      </div>
+      <div class="speed-chip" style="--accent-color:var(--accent-blue)">
+        <div class="zone">Carretera 2 carriles</div>
+        <div class="kmh" style="color:var(--accent-blue)">90</div>
+        <div class="kmh-unit">km/h</div>
+      </div>
+      <div class="speed-chip" style="--accent-color:var(--accent-yellow)">
+        <div class="zone">Carretera 4 carriles</div>
+        <div class="kmh" style="color:var(--accent-yellow)">100</div>
+        <div class="kmh-unit">km/h</div>
+      </div>
+      <div class="speed-chip" style="--accent-color:var(--accent-orange)">
+        <div class="zone">Autopista</div>
+        <div class="kmh" style="color:var(--accent-orange)">110</div>
+        <div class="kmh-unit">km/h</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Distancia de seguridad + frenos -->
+  <div class="cards-grid g2" style="margin-bottom:16px">
+    <div class="card" style="--accent-color:var(--accent-blue)">
+      <div class="card-label">Regla práctica</div>
+      <h3>Distancia de seguridad</h3>
+      <table class="data-table" style="margin-top:14px">
+        <thead><tr><th>Velocidad</th><th>Distancia mínima</th></tr></thead>
+        <tbody>
+          <tr><td>60 km/h</td><td class="highlight">30 m</td></tr>
+          <tr><td>80 km/h</td><td class="highlight">40 m</td></tr>
+          <tr><td>90 km/h</td><td class="highlight">45 m</td></tr>
+          <tr><td>100 km/h</td><td class="highlight" style="color:var(--accent-red)">50 m (legal)</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:12px; font-size:12px; color:var(--text-dim)">Regla: 0,5 m por cada km/h de velocidad</p>
+    </div>
+
+    <div class="card" style="--accent-color:var(--accent-red)">
+      <div class="card-label">Distancia de frenado</div>
+      <h3>A 80 km/h cargado</h3>
+      <div style="margin-top:14px">
+        <div class="stat-card" style="--accent-color:var(--accent-red); padding:14px">
+          <div class="unit-lbl">Para detenerse completamente</div>
+          <div class="big-num">60–100 m</div>
+          <div class="stat-desc">Dependiendo del peso, frenos y pavimento</div>
+        </div>
+        <div style="margin-top:10px; padding:10px; background:var(--surface2); border-radius:4px; border-left:2px solid var(--accent-red)">
+          <p style="font-size:12px; color:var(--text-muted)">A <strong style="color:var(--text)">90 km/h</strong>, esa distancia puede superar los <strong style="color:var(--accent-red)">120 metros</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert-box" style="--accent-color:var(--accent-red)">
+    <div class="alert-head">🚫 Prohibición absoluta en descensos</div>
+    <p>Bajar una pendiente con el motor en punto muerto o con el embrague pisado es una práctica extremadamente peligrosa y está prohibida. El vehículo pierde el freno motor y los frenos de servicio se sobrecalientan rápidamente.</p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 5 — MECÁNICA
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-4">
+  <div class="unit-header">
+    <div class="unit-number">05</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-orange)">🔧 Sistemas críticos</div>
+      <h2 class="unit-title">Mecánica Operativa<br>e Inspección del Vehículo</h2>
+      <p class="unit-desc">El conductor tipo E no necesita ser mecánico, pero sí debe detectar señales de falla y ejecutar la inspección pre-ruta con precisión y responsabilidad.</p>
+    </div>
+  </div>
+
+  <!-- Diagnóstico de humo -->
+  <div class="card" style="--accent-color:var(--accent-orange); margin-bottom:16px">
+    <div class="card-label">Diagnóstico visual · Lectura del humo de escape</div>
+    <h3>Color del humo = estado del motor</h3>
+    <div class="smoke-row" style="margin-top:18px">
+      <div class="smoke-chip">
+        <div class="smoke-dot" style="background:#1a1a1a; border:2px solid #555"></div>
+        <h4 style="color:#888">Negro</h4>
+        <p>Exceso de combustible o falta de aire. Filtro sucio, inyectores sucios, turbo defectuoso. <strong style="color:var(--accent-orange)">Revisar antes de salir.</strong></p>
+      </div>
+      <div class="smoke-chip">
+        <div class="smoke-dot" style="background:#4a9eff44; border:2px solid var(--accent-blue)"></div>
+        <h4 style="color:var(--accent-blue)">Azul</h4>
+        <p>Aceite quemándose en cámara. Anillos desgastados o sellos de válvulas dañados. <strong style="color:var(--accent-orange)">Revisión urgente.</strong></p>
+      </div>
+      <div class="smoke-chip">
+        <div class="smoke-dot" style="background:#ffffff33; border:2px solid #aaa"></div>
+        <h4 style="color:#ccc">Blanco frío</h4>
+        <p>Vapor de agua en motor frío. Normal en arranque. Desaparece al calentar. <strong style="color:var(--accent-green)">Sin preocupación.</strong></p>
+      </div>
+      <div class="smoke-chip">
+        <div class="smoke-dot" style="background:var(--accent-red); opacity:0.5; border:2px solid var(--accent-red)"></div>
+        <h4 style="color:var(--accent-red)">Blanco caliente</h4>
+        <p>Refrigerante en cámara. Junta de culata dañada. <strong style="color:var(--accent-red)">DETENER INMEDIATO.</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Presión de frenos -->
+  <div class="cards-grid g2" style="margin-bottom:16px">
+    <div class="stat-card" style="--accent-color:var(--accent-green)">
+      <div class="unit-lbl">Presión óptima del sistema de frenos</div>
+      <div class="big-num">100–120</div>
+      <div class="unit-lbl">PSI — Presión normal de operación</div>
+      <div class="stat-desc">Menos de 80 PSI: NO salir a ruta. Entre 80–99 PSI: precaución, revisar antes de salir.</div>
+    </div>
+    <div class="stat-card" style="--accent-color:var(--accent-orange)">
+      <div class="unit-lbl">Apagado correcto del motor</div>
+      <div class="big-num">3–5 min</div>
+      <div class="unit-lbl">En ralentí antes de apagar</div>
+      <div class="stat-desc">Especialmente en motores con turbocompresor (giran +100.000 RPM con lubricación de aceite del motor).</div>
+    </div>
+  </div>
+
+  <!-- Check list -->
+  <div class="card" style="--accent-color:var(--accent-green)">
+    <div class="card-label">Pre-trip inspection · Inspección previa a la marcha</div>
+    <h3>Check-list exterior e interior</h3>
+    <ul class="checklist" style="margin-top:16px; --accent-color:var(--accent-green)">
+      <li><div class="check-box"></div>Estado de neumáticos: presión visual, cortes, desgaste irregular</li>
+      <li><div class="check-box"></div>Estado de luces: delanteras, traseras, direccionales, emergencia</li>
+      <li><div class="check-box"></div>Fugas visibles de aceite, combustible, refrigerante o líquido de frenos</li>
+      <li><div class="check-box"></div>Presión de aire del sistema de frenos: 100–120 PSI</li>
+      <li><div class="check-box"></div>Nivel de aceite, refrigerante y líquido de dirección</li>
+      <li><div class="check-box"></div>Estado de la carga: amarres, lonas, precintos</li>
+      <li><div class="check-box"></div>Cinturón de seguridad: funcionamiento correcto</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 6 — ENTORNOS Y CONDICIONES
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-5">
+  <div class="unit-header">
+    <div class="unit-number">06</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-yellow)">🌎 Adaptación</div>
+      <h2 class="unit-title">Conducción en Diferentes<br>Entornos y Condiciones</h2>
+      <p class="unit-desc">Urbano, autopista, pendientes, lluvia, neblina. Cada entorno exige técnicas específicas. La adaptación es la marca del conductor profesional de excelencia.</p>
+    </div>
+  </div>
+
+  <div class="cards-grid g2" style="margin-bottom:16px">
+    <div class="card" style="--accent-color:var(--accent-blue)">
+      <div class="card-label">Ciclo urbano</div>
+      <h3>Ciudad — Mayor exigencia</h3>
+      <div class="stat-card" style="--accent-color:var(--accent-orange); margin-top:14px; padding:14px">
+        <div class="unit-lbl">Incremento de consumo vs carretera</div>
+        <div class="big-num">+50%</div>
+      </div>
+      <ul class="steps-list" style="margin-top:12px; --accent-color:var(--accent-blue)">
+        <li><div class="step-num" style="background:var(--accent-blue); font-size:10px">✓</div><div class="step-text">Prever semáforos y aprovechar rodamiento libre</div></li>
+        <li><div class="step-num" style="background:var(--accent-blue); font-size:10px">✓</div><div class="step-text">Vigilar puntos ciegos en intersecciones y rotondas</div></li>
+        <li><div class="step-num" style="background:var(--accent-blue); font-size:10px">✓</div><div class="step-text">Respetar restricciones horarias para pesados</div></li>
+      </ul>
+    </div>
+
+    <div class="card" style="--accent-color:var(--accent-red)">
+      <div class="card-label">Pendientes — Mayor riesgo</div>
+      <h3>Descensos</h3>
+      <ul class="steps-list" style="margin-top:14px; --accent-color:var(--accent-orange)">
+        <li><div class="step-num" style="background:var(--accent-orange)">1</div><div class="step-text">Reducir velocidad ANTES de iniciar el descenso</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">2</div><div class="step-text">Seleccionar la MISMA marcha que usaría para subir</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">3</div><div class="step-text">Usar freno motor como retención principal</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">4</div><div class="step-text">Frenos de servicio: pulsos cortos y firmes, no continuo</div></li>
+        <li><div class="step-num" style="background:var(--accent-red); color:white">✗</div><div class="step-text" style="color:var(--accent-red)">NUNCA en punto muerto ni embrague pisado</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Condiciones climáticas -->
+  <div class="card" style="--accent-color:var(--accent-yellow)">
+    <div class="card-label">Condiciones climáticas adversas</div>
+    <h3>Protocolos de adaptación</h3>
+    <div class="cards-grid g2" style="margin-top:18px; gap:12px">
+      <div style="background:var(--surface2); border-radius:4px; padding:16px; border:1px solid var(--border)">
+        <div style="font-size:24px; margin-bottom:8px">🌧</div>
+        <div style="font-family:'Oswald',sans-serif; font-size:15px; color:var(--accent-blue); text-transform:uppercase; margin-bottom:6px">Lluvia</div>
+        <p style="font-size:12px; color:var(--text-muted); line-height:1.6">Reducir velocidad al menos <strong style="color:var(--text)">−30%</strong>. Duplicar distancia de seguridad. Encender luces de posición y cruce. Vigilar hidroplaneo.</p>
+      </div>
+      <div style="background:var(--surface2); border-radius:4px; padding:16px; border:1px solid var(--border)">
+        <div style="font-size:24px; margin-bottom:8px">🌫</div>
+        <div style="font-family:'Oswald',sans-serif; font-size:15px; color:var(--accent-yellow); text-transform:uppercase; margin-bottom:6px">Neblina</div>
+        <p style="font-size:12px; color:var(--text-muted); line-height:1.6">Visibilidad &lt;50 m: insuficiente para frenar. Reducir drásticamente. Si visibilidad &lt;30 m: <strong style="color:var(--accent-red)">DETENERSE en lugar seguro.</strong></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 7 — EMERGENCIAS
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-6">
+  <div class="unit-header">
+    <div class="unit-number">07</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-red)">🚨 Respuesta crítica</div>
+      <h2 class="unit-title">Situaciones de<br>Emergencia en Carretera</h2>
+      <p class="unit-desc">La respuesta incorrecta puede tener consecuencias catastróficas. El conductor profesional entrena su reacción para que sea protocolo, no pánico.</p>
+    </div>
+  </div>
+
+  <div class="alert-box" style="--accent-color:var(--accent-red); margin-bottom:24px">
+    <div class="alert-head">Principio fundamental ante CUALQUIER emergencia</div>
+    <p><strong>MANTENER LA CALMA.</strong> El pánico produce respuestas instintivas equivocadas. La serenidad permite aplicar el protocolo correcto.</p>
+  </div>
+
+  <!-- Protocolos -->
+  <div class="cards-grid g2" style="margin-bottom:16px">
+    <div class="card" style="--accent-color:var(--accent-red)">
+      <div class="card-label">Emergencia crítica</div>
+      <h3>Falla de Frenos</h3>
+      <ul class="steps-list" style="margin-top:14px; --accent-color:var(--accent-red)">
+        <li><div class="step-num" style="background:var(--accent-red)">1</div><div class="step-text">Mantener calma — NO pisar el embrague</div></li>
+        <li><div class="step-num" style="background:var(--accent-red)">2</div><div class="step-text">Freno motor: bajar marchas progresivamente</div></li>
+        <li><div class="step-num" style="background:var(--accent-red)">3</div><div class="step-text">Bombear el pedal varias veces (puede recuperar presión)</div></li>
+        <li><div class="step-num" style="background:var(--accent-red)">4</div><div class="step-text">Freno de emergencia con cuidado (no bruscamente)</div></li>
+        <li><div class="step-num" style="background:var(--accent-red)">5</div><div class="step-text">Luces de emergencia + bocina para alertar</div></li>
+        <li><div class="step-num" style="background:var(--accent-red)">6</div><div class="step-text">Buscar carril de escape, cuneta o zona plana</div></li>
+      </ul>
+    </div>
+
+    <div class="card" style="--accent-color:var(--accent-orange)">
+      <div class="card-label">Pérdida de control</div>
+      <h3>Reventón de Neumático</h3>
+      <ul class="steps-list" style="margin-top:14px; --accent-color:var(--accent-orange)">
+        <li><div class="step-num" style="background:var(--accent-orange)">1</div><div class="step-text">Sujetar el volante firmemente con las DOS manos</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">2</div><div class="step-text">NO frenar bruscamente</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">3</div><div class="step-text">Mantener el vehículo recto, resistir el jalón</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">4</div><div class="step-text">Levantar el pie del acelerador progresivamente</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">5</div><div class="step-text">Frenar suave y progresivamente hacia la derecha</div></li>
+        <li><div class="step-num" style="background:var(--accent-orange)">6</div><div class="step-text">Señales de emergencia a 100 m detrás del vehículo</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Primeros auxilios -->
+  <div class="card" style="--accent-color:var(--accent-green)">
+    <div class="card-label">Primeros auxilios básicos en accidentes viales</div>
+    <h3>Cadena de supervivencia: P.A.S.</h3>
+    <div class="cards-grid g3" style="margin-top:18px; gap:12px">
+      <div style="text-align:center; padding:20px; background:var(--surface2); border-radius:4px; border:1px solid var(--border)">
+        <div style="font-size:32px; margin-bottom:10px">🔶</div>
+        <div style="font-family:'Oswald',sans-serif; font-size:18px; color:var(--accent-orange); text-transform:uppercase">Proteger</div>
+        <p style="font-size:11px; color:var(--text-muted); margin-top:6px; line-height:1.5">Señalizar la escena, apagar motores, evitar nuevos accidentes</p>
+      </div>
+      <div style="text-align:center; padding:20px; background:var(--surface2); border-radius:4px; border:1px solid var(--border)">
+        <div style="font-size:32px; margin-bottom:10px">📞</div>
+        <div style="font-family:'Oswald',sans-serif; font-size:18px; color:var(--accent-blue); text-transform:uppercase">Alertar</div>
+        <p style="font-size:11px; color:var(--text-muted); margin-top:6px; line-height:1.5">Llamar al <strong style="color:var(--text)">911</strong> con ubicación exacta, número de heridos y estado de víctimas</p>
+      </div>
+      <div style="text-align:center; padding:20px; background:var(--surface2); border-radius:4px; border:1px solid var(--border)">
+        <div style="font-size:32px; margin-bottom:10px">🩺</div>
+        <div style="font-family:'Oswald',sans-serif; font-size:18px; color:var(--accent-green); text-transform:uppercase">Socorrer</div>
+        <p style="font-size:11px; color:var(--text-muted); margin-top:6px; line-height:1.5">Solo si está capacitado. No mover víctimas con posible lesión en columna salvo peligro inminente</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 8 — CARGA
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-7">
+  <div class="unit-header">
+    <div class="unit-number">08</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-orange)">📦 Logística y normativa</div>
+      <h2 class="unit-title">Transporte de Carga:<br>Normativa, Logística y Tecnología</h2>
+      <p class="unit-desc">Pesos, dimensiones, documentos, restricciones y materiales peligrosos. Conocer la normativa de carga protege al conductor y garantiza la seguridad de todos.</p>
+    </div>
+  </div>
+
+  <!-- Pesos y dimensiones -->
+  <div class="cards-grid g3" style="margin-bottom:16px">
+    <div class="stat-card" style="--accent-color:var(--accent-orange)">
+      <div class="unit-lbl">Peso máximo — Camión simple</div>
+      <div class="big-num">20 t</div>
+      <div class="stat-desc">Sin remolque — peso bruto vehicular máximo</div>
+    </div>
+    <div class="stat-card" style="--accent-color:var(--accent-red)">
+      <div class="unit-lbl">Peso máximo — Tráiler articulado</div>
+      <div class="big-num">48 t</div>
+      <div class="stat-desc">Cabezal + semirremolque — peso bruto vehicular</div>
+    </div>
+    <div class="stat-card" style="--accent-color:var(--accent-blue)">
+      <div class="unit-lbl">Altura máxima legal</div>
+      <div class="big-num">4.30 m</div>
+      <div class="stat-desc">Sobre el nivel de la calzada. Verificar antes de pasos bajos y túneles.</div>
+    </div>
+  </div>
+
+  <!-- MATPEL -->
+  <div class="card" style="--accent-color:var(--accent-orange); margin-bottom:16px">
+    <div class="card-label">MATPEL · Clasificación ONU</div>
+    <h3>9 Clases de Materiales Peligrosos</h3>
+    <div class="matpel-grid" style="margin-top:18px">
+      <div class="matpel-card" style="background:rgba(239,68,68,0.12); border-color:rgba(239,68,68,0.3)">
+        <div class="matpel-icon">💥</div>
+        <div class="matpel-num" style="color:var(--accent-red)">1</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Explosivos</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(34,197,94,0.12); border-color:rgba(34,197,94,0.3)">
+        <div class="matpel-icon">💨</div>
+        <div class="matpel-num" style="color:var(--accent-green)">2</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Gases</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(249,115,22,0.12); border-color:rgba(249,115,22,0.3)">
+        <div class="matpel-icon">🔥</div>
+        <div class="matpel-num" style="color:var(--accent-orange)">3</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Líq. inflamables</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(234,179,8,0.12); border-color:rgba(234,179,8,0.3)">
+        <div class="matpel-icon">🧯</div>
+        <div class="matpel-num" style="color:var(--accent-yellow)">4</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Sól. inflamables</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(168,85,247,0.12); border-color:rgba(168,85,247,0.3)">
+        <div class="matpel-icon">⭕</div>
+        <div class="matpel-num" style="color:var(--accent-purple)">5</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Oxidantes</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(14,165,233,0.12); border-color:rgba(14,165,233,0.3)">
+        <div class="matpel-icon">☠</div>
+        <div class="matpel-num" style="color:var(--accent-blue)">6</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Tóxicos</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(239,68,68,0.08); border-color:rgba(239,68,68,0.2)">
+        <div class="matpel-icon">☢</div>
+        <div class="matpel-num" style="color:#f87171">7</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Radiactivos</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(249,115,22,0.08); border-color:rgba(249,115,22,0.2)">
+        <div class="matpel-icon">⚗</div>
+        <div class="matpel-num" style="color:var(--accent-orange)">8</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Corrosivos</div>
+      </div>
+      <div class="matpel-card" style="background:rgba(107,138,171,0.12); border-color:var(--border)">
+        <div class="matpel-icon">⚠</div>
+        <div class="matpel-num" style="color:var(--text-muted)">9</div>
+        <div class="matpel-name" style="color:var(--text-muted)">Varios / Misc.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tecnología -->
+  <div class="card" style="--accent-color:var(--accent-blue)">
+    <div class="card-label">Tecnología en el transporte pesado moderno</div>
+    <h3>Sistemas ADAS y tacógrafo digital</h3>
+    <div class="timeline" style="margin-top:18px; --accent-color:var(--accent-blue)">
+      <div class="tl-item"><div class="tl-label">Tacógrafo Digital</div><div class="tl-text">Registra velocidad, tiempos de conducción y descanso, y distancias recorridas. La ANT puede auditarlo. <strong style="color:var(--accent-red)">Manipularlo es infracción grave.</strong></div></div>
+      <div class="tl-item"><div class="tl-label">ABS</div><div class="tl-text">Anti-bloqueo de frenos: evita bloqueo de ruedas en frenadas de emergencia, manteniendo la dirección.</div></div>
+      <div class="tl-item"><div class="tl-label">ESP</div><div class="tl-text">Control Electrónico de Estabilidad: detecta y corrige automáticamente la tendencia al derrape o vuelco.</div></div>
+      <div class="tl-item"><div class="tl-label">LDWS</div><div class="tl-text">Alerta de cambio involuntario de carril: advierte cuando el vehículo se sale sin señalizar.</div></div>
+      <div class="tl-item"><div class="tl-label">GPS + Flota</div><div class="tl-text">Rastreo en tiempo real, monitoreo de velocidad y rutas, comunicación con central de operaciones.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     UNIDAD 9 — SALUD
+══════════════════════════════════════════ -->
+<section class="unit-section" id="unit-8">
+  <div class="unit-header">
+    <div class="unit-number">09</div>
+    <div class="unit-title-block">
+      <div class="unit-tag" style="color:var(--accent-green)">❤ Bienestar profesional</div>
+      <h2 class="unit-title">Salud, Fatiga y Bienestar<br>del Conductor Profesional</h2>
+      <p class="unit-desc">Un conductor fatigado o bajo efectos de sustancias tiene reflejos más lentos, toma peores decisiones y reacciona tarde ante emergencias. La salud es seguridad vial.</p>
+    </div>
+  </div>
+
+  <!-- Tiempos de conducción -->
+  <div class="card" style="--accent-color:var(--accent-green); margin-bottom:16px">
+    <div class="card-label">Normativa ANT · Tiempos máximos de conducción y descanso</div>
+    <h3>Límites de jornada</h3>
+    <div class="cards-grid g3" style="margin-top:18px; gap:12px">
+      <div class="stat-card" style="--accent-color:var(--accent-green); padding:16px">
+        <div class="unit-lbl">Conducción continua máx.</div>
+        <div class="big-num" style="font-size:40px">4.5 h</div>
+        <div class="stat-desc">Luego: pausa mínima obligatoria de 45 minutos</div>
+      </div>
+      <div class="stat-card" style="--accent-color:var(--accent-blue); padding:16px">
+        <div class="unit-lbl">Conducción diaria máxima</div>
+        <div class="big-num" style="font-size:40px">9 h</div>
+        <div class="stat-desc">En la jornada laboral completa</div>
+      </div>
+      <div class="stat-card" style="--accent-color:var(--accent-purple); padding:16px">
+        <div class="unit-lbl">Descanso diario mínimo</div>
+        <div class="big-num" style="font-size:40px">11 h</div>
+        <div class="stat-desc">Consecutivas entre jornadas laborales</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Microsueño -->
+  <div class="card" style="--accent-color:var(--accent-red); margin-bottom:16px">
+    <div class="card-label">Riesgo invisible y fatal</div>
+    <h3>El microsueño al volante</h3>
+    <div style="margin-top:18px; padding:24px; background:var(--surface2); border-radius:4px; text-align:center; position:relative; overflow:hidden">
+      <div style="font-family:'Oswald',sans-serif; font-size:14px; color:var(--text-dim); text-transform:uppercase; letter-spacing:2px; margin-bottom:12px">A 90 km/h · Solo 2 segundos de microsueño</div>
+      <div style="font-family:'Oswald',sans-serif; font-size:72px; font-weight:700; color:var(--accent-red); line-height:1; animation:breathe 2s ease-in-out infinite">50 m</div>
+      <div style="font-size:14px; color:var(--text-muted); margin-top:8px">sin conductor activo al volante</div>
+      <div style="position:absolute; inset:0; background:radial-gradient(circle at 50% 50%, rgba(239,68,68,0.06), transparent 70%); pointer-events:none"></div>
+    </div>
+    <div class="alert-box" style="--accent-color:var(--accent-red); margin-top:14px">
+      <div class="alert-head">Equivalencia científica (OMS)</div>
+      <p>Conducir 8 horas continuas al volante equivale en rendimiento cognitivo a tener <strong>0,5 g/l de alcohol en sangre</strong>.</p>
+    </div>
+  </div>
+
+  <!-- Alcohol -->
+  <div class="card" style="--accent-color:var(--accent-yellow)">
+    <div class="card-label">Límites legales · Conductores profesionales Ecuador</div>
+    <h3>Alcohol y conducción</h3>
+    <table class="data-table" style="margin-top:14px">
+      <thead><tr><th>Nivel g/L en sangre</th><th>Clasificación</th><th>Sanción principal</th></tr></thead>
+      <tbody>
+        <tr><td>Hasta 0,3 g/L</td><td style="color:var(--accent-green)">Sin sanción penal</td><td>Descuento puntos + multa menor</td></tr>
+        <tr><td>0,3 – 0,8 g/L</td><td style="color:var(--accent-yellow)">Infracción grave</td><td>Multa + suspensión de licencia</td></tr>
+        <tr><td>0,8 – 1,2 g/L</td><td style="color:var(--accent-orange)">Delito COIP (Art.383)</td><td>Prisión 3–6 meses + revocación</td></tr>
+        <tr><td>Más de 1,2 g/L</td><td style="color:var(--accent-red)">Delito agravado</td><td>Prisión 6–12 meses + pérdida definitiva</td></tr>
+      </tbody>
+    </table>
+    <div style="margin-top:12px; padding:10px 14px; background:rgba(239,68,68,0.08); border-radius:4px; border:1px solid rgba(239,68,68,0.2)">
+      <p style="font-size:12px; color:var(--accent-red); font-family:'Space Mono',monospace; letter-spacing:0.5px">Las drogas y sustancias psicotrópicas están absolutamente prohibidas — cualquier nivel detectado es delito</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer class="footer">
+  Escuela de Capacitación · Sindicato Provincial de Choferes Profesionales de Manabí · Portoviejo · Ecuador · 2026
+</footer>
+
+<script>
+function showUnit(index) {
+  // Ocultar todas las secciones
+  document.querySelectorAll('.unit-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+
+  // Mostrar la seleccionada
+  document.getElementById('unit-' + index).classList.add('active');
+  document.querySelectorAll('.nav-tab')[index].classList.add('active');
+
+  // Animar barras de progreso
+  setTimeout(() => {
+    document.querySelectorAll('#unit-' + index + ' .prog-fill').forEach(bar => {
+      bar.classList.add('animate');
+    });
+  }, 100);
+
+  // Scroll suave al inicio del contenido
+  document.querySelector('.main').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Inicializar barras de la primera unidad
+setTimeout(() => {
+  document.querySelectorAll('#unit-0 .prog-fill').forEach(bar => bar.classList.add('animate'));
+}, 300);
+</script>
+</body>
+</html>
